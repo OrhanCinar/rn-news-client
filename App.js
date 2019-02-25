@@ -111,7 +111,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     flexDirection: "row",
     flexWrap: "wrap",
-    margin: 5
+    margin: 6
     //flexGrow: 0
   },
 
