@@ -1,7 +1,24 @@
 import React from "react";
-import { StyleSheet, Text, View, FlatList, Card, WebView } from "react-native";
+import { StyleSheet, View, FlatList, Image } from "react-native";
 import * as rssParser from "react-native-rss-parser";
 import HTML from "react-native-render-html";
+
+import {
+  Container,
+  Header,
+  Content,
+  List,
+  ListItem,
+  Text,
+  Left,
+  Right,
+  Icon,
+  Card,
+  CardItem,
+  Body,
+  Badge
+} from "native-base";
+
 const RSS_URL = "https://news.google.com/rss?hl=fr&gl=FR&ceid=FR:fr";
 
 export default class App extends React.Component {
@@ -16,9 +33,9 @@ export default class App extends React.Component {
       .then(rss => {
         //console.log(rss.items.length);
 
-        // for (let i = 0; i < 1; i++) {
-        //   console.log(rss.items[0]);
-        // }
+        for (let i = 0; i < 1; i++) {
+          console.log(rss.items[0]);
+        }
 
         rss.items.forEach(element => {
           var item = {
@@ -48,16 +65,39 @@ export default class App extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <FlatList
-          data={this.state.feed}
-          renderItem={({ item }) => (
-            <View style={styles.cardContainer}>
-              <Text>{item.date}</Text>
+        <Container>
+          <Content>
+            <Card>
+              <FlatList
+                data={this.state.feed}
+                renderItem={({ item }) => (
+                  <View style={styles.cardContainer}>
+                    {/* <Text>{item.date}</Text>
               <Text>{item.title}</Text>
-              <HTML html={item.description} />
-            </View>
-          )}
-        />
+              <HTML html={item.description} /> */}
+
+                    <CardItem header>
+                      <Text>{item.title}</Text>
+                    </CardItem>
+
+                    <CardItem cardBody>
+                      <Image
+                        source={require("./assets/placeholder.png")}
+                        style={{ height: 65, width: null, flex: 1 }}
+                      />
+                    </CardItem>
+
+                    <CardItem footer>
+                      <Badge>
+                        <Text>{item.date}</Text>
+                      </Badge>
+                    </CardItem>
+                  </View>
+                )}
+              />
+            </Card>
+          </Content>
+        </Container>
       </View>
     );
   }
